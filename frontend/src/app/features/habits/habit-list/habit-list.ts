@@ -1,8 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { Habit } from '../habit.model';
+import { HabitRow } from '../habit-row/habit-row';
 
 @Component({
-  imports: [],
+  imports: [HabitRow],
   selector: 'app-habit-list',
   styleUrl: './habit-list.css',
   templateUrl: './habit-list.html',

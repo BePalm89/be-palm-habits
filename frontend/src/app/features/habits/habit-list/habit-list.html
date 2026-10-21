@@ -1,7 +1,9 @@
 @if (habits().length) {
   <ul>
     @for (habit of habits(); track habit.id) {
-      <li>{{ habit.name }} ({{ habit.category }})</li>
+      <li>
+        <app-habit-row [habit]="habit" />
+      </li>
     }
   </ul>
 } @else {
