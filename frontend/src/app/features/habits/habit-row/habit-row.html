@@ -1,1 +1,8 @@
 <p>{{ habit().name }} ({{ habit().category }})</p>
+<button
+  [attr.aria-label]="'delete ' + habit().name"
+  type="button"
+  (click)="delete.emit(habit().id)"
+>
+  Delete
+</button>

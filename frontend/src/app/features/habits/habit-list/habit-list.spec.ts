@@ -25,4 +25,17 @@ describe('HabitList', () => {
 
     expect(numberOfLi).toBe(3);
   });
+
+  it('should delete the right item when clicking on the delete button', async () => {
+    const el = fixture.nativeElement as HTMLElement;
+    const firstDeleteButton = el.querySelector('button');
+
+    firstDeleteButton?.click();
+    await fixture.whenStable();
+
+    const numberOfLi = el.querySelectorAll('li').length;
+
+    expect(numberOfLi).toBe(2);
+    expect(el.textContent).not.toContain('coding training');
+  });
 });

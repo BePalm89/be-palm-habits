@@ -32,4 +32,8 @@ export class HabitList {
       scheduledDays: [0, 1, 2, 3, 4, 5, 6],
     },
   ]);
+
+  protected onDelete(id: string) {
+    this.habits.update((habits) => habits.filter((habit) => habit.id !== id));
+  }
 }

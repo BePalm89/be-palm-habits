@@ -2,7 +2,7 @@
   <ul>
     @for (habit of habits(); track habit.id) {
       <li>
-        <app-habit-row [habit]="habit" />
+        <app-habit-row [habit]="habit" (delete)="onDelete($event)" />
       </li>
     }
   </ul>

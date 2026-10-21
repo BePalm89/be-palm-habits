@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Habit } from '../habit.model';
 
 @Component({
@@ -9,4 +9,5 @@ import { Habit } from '../habit.model';
 })
 export class HabitRow {
   readonly habit = input.required<Habit>();
+  readonly delete = output<string>();
 }
