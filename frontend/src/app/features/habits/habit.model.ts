@@ -1,4 +1,4 @@
-export const CATEGORIES = ['study', 'health', 'sport'] as const;
+export const CATEGORIES = ['study', 'health', 'sport', 'cats', 'reading'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 export type Habit = {

@@ -1,0 +1,9 @@
+@if (habits().length) {
+  <ul>
+    @for (habit of habits(); track habit.id) {
+      <li>{{ habit.name }} ({{ habit.category }})</li>
+    }
+  </ul>
+} @else {
+  <p>No habits yet</p>
+}
