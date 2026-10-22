@@ -3,7 +3,7 @@ import { Habit } from '../habit.model';
 
 @Service()
 export class HabitService {
-  private readonly _habits = signal<Habit[]>([
+  private readonly _habits = signal<readonly Habit[]>([
     {
       id: 'id1',
       name: 'coding training',
