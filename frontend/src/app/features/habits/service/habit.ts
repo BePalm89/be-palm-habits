@@ -34,14 +34,14 @@ export class HabitService {
   }
 
   add(habit: Pick<Habit, 'name' | 'category'>) {
-    const newHabit = {
-      name: habit.name,
+    const newHabit: Habit = {
+      name: habit.name.trim(),
       category: habit.category,
       id: crypto.randomUUID(),
-      reminder: '',
-      scheduledDays: EVERY_DAY,
+      reminder: null,
+      scheduledDays: [...EVERY_DAY],
     };
 
-    return this._habits.update((h) => [...h, newHabit]);
+    this._habits.update((habits) => [...habits, newHabit]);
   }
 }

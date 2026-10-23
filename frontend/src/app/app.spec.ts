@@ -28,6 +28,6 @@ describe('App', () => {
     await fixture.whenStable();
     const link = (fixture.nativeElement as HTMLElement).querySelector('a');
 
-    expect(link?.getAttribute('href')).toBe('habits/add');
+    expect(link?.getAttribute('href')).toBe('/habits/add');
   });
 });
