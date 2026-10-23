@@ -3,4 +3,11 @@
 @for (error of addHabitForm.name().errors(); track error.kind) {
   <p>{{ error.kind }}</p>
 }
+<label for="category">Category:</label>
+<select id="category" [formField]="addHabitForm.category">
+  <option value="">Please choose a category</option>
+  @for (category of categories; track category) {
+    <option [value]="category">{{ category }}</option>
+  }
+</select>
 <a routerLink="/habits">Back to habits</a>
