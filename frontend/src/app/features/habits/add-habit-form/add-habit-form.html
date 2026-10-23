@@ -1,1 +1,6 @@
+<label for="name">Name:</label>
+<input id="name" type="text" [formField]="addHabitForm.name" />
+@for (error of addHabitForm.name().errors(); track error.kind) {
+  <p>{{ error.kind }}</p>
+}
 <a routerLink="/habits">Back to habits</a>

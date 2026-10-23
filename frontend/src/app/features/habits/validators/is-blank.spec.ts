@@ -12,6 +12,7 @@ describe('isBlank', () => {
     ['.', false],
     ['/stretch', false],
     ['a', false],
+    ['   a   ', false],
   ])('isBlank(%j) → %s', (input, expected) => {
     expect(isBlank(input)).toBe(expected);
   });
