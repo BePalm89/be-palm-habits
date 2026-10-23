@@ -1,5 +1,5 @@
 import { Service, signal } from '@angular/core';
-import { Habit } from '../habit.model';
+import { EVERY_DAY, Habit } from '../habit.model';
 
 @Service()
 export class HabitService {
@@ -31,5 +31,17 @@ export class HabitService {
 
   delete(id: string) {
     this._habits.update((habits) => habits.filter((habit) => habit.id !== id));
+  }
+
+  add(habit: Pick<Habit, 'name' | 'category'>) {
+    const newHabit = {
+      name: habit.name,
+      category: habit.category,
+      id: crypto.randomUUID(),
+      reminder: '',
+      scheduledDays: EVERY_DAY,
+    };
+
+    return this._habits.update((h) => [...h, newHabit]);
   }
 }

@@ -1,15 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { form, required, validate } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
-import { isBlank } from '../validators/is-blank';
+import { notBlank } from '../validators/not-blank';
 
 interface AddHabitFormInterface {
   name: string;
 }
-
-const addHabitFormModel = signal<AddHabitFormInterface>({
-  name: '',
-});
 
 @Component({
   imports: [RouterLink],
@@ -18,9 +14,14 @@ const addHabitFormModel = signal<AddHabitFormInterface>({
   templateUrl: './add-habit-form.html',
 })
 export class AddHabitForm {
+  addHabitFormModel = signal<AddHabitFormInterface>({
+    name: '',
+  });
+
   constructor() {
-    const addHabitForm = form(addHabitFormModel, (schemaPath) => {
+    const addHabitForm = form(this.addHabitFormModel, (schemaPath) => {
       required(schemaPath.name);
+      //validate(schemaPath.name, ({ value }) => notBlank(value));
     });
   }
 }
