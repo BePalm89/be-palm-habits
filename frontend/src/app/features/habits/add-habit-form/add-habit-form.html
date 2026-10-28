@@ -1,13 +1,40 @@
-<label for="name">Name:</label>
-<input id="name" type="text" [formField]="addHabitForm.name" />
-@for (error of addHabitForm.name().errors(); track error.kind) {
-  <p>{{ error.kind }}</p>
-}
-<label for="category">Category:</label>
-<select id="category" [formField]="addHabitForm.category">
-  <option value="">Please choose a category</option>
-  @for (category of categories; track category) {
-    <option [value]="category">{{ category }}</option>
+<form [formRoot]="addHabitForm">
+  <label for="name">Name:</label>
+  <input
+    id="name"
+    type="text"
+    [formField]="addHabitForm.name"
+    [attr.aria-invalid]="addHabitForm.name().touched() && addHabitForm.name().invalid()"
+    [attr.aria-describedby]="addHabitForm.name().touched() ? 'name-errors' : null"
+  />
+  @if (addHabitForm.name().touched()) {
+    <div id="name-errors">
+      @for (error of addHabitForm.name().errors(); track error.kind) {
+        <p>{{ error.message }}</p>
+      }
+    </div>
   }
-</select>
+
+  <label for="category">Category:</label>
+  <select
+    id="category"
+    [formField]="addHabitForm.category"
+    [attr.aria-invalid]="addHabitForm.category().touched() && addHabitForm.category().invalid()"
+    [attr.aria-describedby]="addHabitForm.category().touched() ? 'category-errors' : null"
+  >
+    <option value="">Please choose a category</option>
+    @for (category of categories; track category) {
+      <option [value]="category">{{ category }}</option>
+    }
+  </select>
+  @if (addHabitForm.category().touched()) {
+    <div id="category-errors">
+      @for (error of addHabitForm.category().errors(); track error.kind) {
+        <p>{{ error.message }}</p>
+      }
+    </div>
+  }
+  <button type="submit">Save</button>
+</form>
+
 <a routerLink="/habits">Back to habits</a>
