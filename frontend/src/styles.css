@@ -1,1 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light dark;
+
+  --font-heading: 'Lexend', sans-serif;
+  --font-text: 'Nunito Sans', sans-serif;
+
+  --color-bg: #eef2f8;
+  --color-surface: #ffffff;
+  --color-text: #13203a;
+  --color-text-muted: #4b5873;
+  --color-accent: #2152d6;
+  --color-on-accent: #ffffff;
+  --color-accent-text: #2152d6;
+  --color-streak-bg: #fbebcf;
+  --color-streak-text: #6b4300;
+  --color-tab-bar: #ffffff;
+  --color-border: #dde3ee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0e1525;
+    --color-surface: #18223a;
+    --color-text: #e8edf7;
+    --color-text-muted: #a3afc6;
+    --color-accent: #3d6bf0;
+    --color-accent-text: #8fb0ff;
+    --color-streak-bg: #3a2c12;
+    --color-streak-text: #f3c774;
+    --color-tab-bar: #121b2e;
+    --color-border: #26314a;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+a {
+  color: var(--color-accent-text);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
