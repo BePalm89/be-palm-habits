@@ -4,3 +4,20 @@
 </div>
 
 <router-outlet></router-outlet>
+
+<nav aria-label="Main navigation">
+  <ul>
+    @for (tab of TAB_ITEMS; track tab.path) {
+      <li>
+        <a
+          [routerLink]="tab.path"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          [routerLinkActiveOptions]="{ exact: tab.exact }"
+        >
+          {{ tab.label }}
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
