@@ -1,10 +1,11 @@
-<div>
-  <h1>Be Palm Habits</h1>
-  <a routerLink="/habits/add">Add habit</a>
-</div>
+<main>
+  <div>
+    <h1>Be Palm Habits</h1>
+    <a routerLink="/habits/add">Add habit</a>
+  </div>
 
-<router-outlet></router-outlet>
-
+  <router-outlet></router-outlet>
+</main>
 <nav aria-label="Main navigation">
   <ul>
     @for (tab of TAB_ITEMS; track tab.path) {
@@ -15,7 +16,8 @@
           ariaCurrentWhenActive="page"
           [routerLinkActiveOptions]="{ exact: tab.exact }"
         >
-          {{ tab.label }}
+          <svg [lucideIcon]="tab.icon"></svg>
+          <span> {{ tab.label }}</span>
         </a>
       </li>
     }
