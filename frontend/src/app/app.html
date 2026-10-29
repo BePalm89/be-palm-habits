@@ -6,20 +6,4 @@
 
   <router-outlet></router-outlet>
 </main>
-<nav aria-label="Main navigation">
-  <ul>
-    @for (tab of TAB_ITEMS; track tab.path) {
-      <li>
-        <a
-          [routerLink]="tab.path"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          [routerLinkActiveOptions]="{ exact: tab.exact }"
-        >
-          <svg [lucideIcon]="tab.icon"></svg>
-          <span> {{ tab.label }}</span>
-        </a>
-      </li>
-    }
-  </ul>
-</nav>
+<app-tab-bar [tabs]="TAB_ITEMS"></app-tab-bar>
