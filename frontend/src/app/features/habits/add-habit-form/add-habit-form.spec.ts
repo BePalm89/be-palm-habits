@@ -49,7 +49,7 @@ describe('AddHabitForm', () => {
     expect(errors).toEqual(expectedErrors);
   });
 
-  it('should show name is required and the lenght of habits should stay 3 when the submission is with an empty string', async () => {
+  it('should show name is required and the length of habits should stay 3 when the submission is with an empty string', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
     const saveButton = element.querySelector<HTMLButtonElement>('button[type="submit"]')!;
@@ -65,7 +65,7 @@ describe('AddHabitForm', () => {
     expect(errors[0]).toEqual('Name is required');
   });
 
-  it('should save correctly a new habits', async () => {
+  it('should save correctly a new habit', async () => {
     const element: HTMLElement = fixture.nativeElement;
     const nameInput = element.querySelector<HTMLInputElement>('#name')!;
 

@@ -9,7 +9,7 @@ import {
 import { TabBar, type TabItem } from './layout/tab-bar/tab-bar';
 
 @Component({
-  imports: [RouterOutlet, TabBar, RouterLink],
+  imports: [RouterOutlet, TabBar],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -41,4 +41,6 @@ export class App {
       icon: LucideMessageCircle,
     },
   ];
+
+  test = new Date('2026-11-01');
 }

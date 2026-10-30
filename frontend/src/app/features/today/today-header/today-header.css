@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+header div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+header div p {
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+header div h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+header a {
+  background-color: var(--color-accent);
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  color: var(--color-on-accent);
+}

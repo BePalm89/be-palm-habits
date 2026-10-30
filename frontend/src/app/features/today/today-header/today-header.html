@@ -1,0 +1,9 @@
+<header>
+  <div>
+    <p>{{ today() | date: 'EEEE, LLLL d' }}</p>
+    <h1>Today</h1>
+  </div>
+  <a routerLink="/habits/add" aria-label="new Habit">
+    <svg lucidePlus [size]="22" [strokeWidth]="2.4"></svg>
+  </a>
+</header>

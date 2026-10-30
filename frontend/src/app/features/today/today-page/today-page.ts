@@ -2,9 +2,10 @@ import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular
 import { HabitService } from '../../habits/service/habit';
 import { todayHabits } from '../utils/today-habits';
 import { TodayHabitRow } from '../today-habit-row/today-habit-row';
+import { TodayHeader } from '../today-header/today-header';
 
 @Component({
-  imports: [TodayHabitRow],
+  imports: [TodayHabitRow, TodayHeader],
   selector: 'app-today-page',
   styleUrl: './today-page.css',
   templateUrl: './today-page.html',

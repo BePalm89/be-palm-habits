@@ -59,3 +59,8 @@ textarea {
   font: inherit;
   color: inherit;
 }
+
+p,
+h1 {
+  margin: 0;
+}
