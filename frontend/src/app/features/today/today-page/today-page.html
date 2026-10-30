@@ -1,1 +1,11 @@
-<p>today-page works!</p>
+@if (habitsForToday().length) {
+  <ul>
+    @for (habit of habitsForToday(); track habit.id) {
+      <li>
+        <app-today-habit-row [habit]="habit"></app-today-habit-row>
+      </li>
+    }
+  </ul>
+} @else {
+  <p>No habits for today</p>
+}
