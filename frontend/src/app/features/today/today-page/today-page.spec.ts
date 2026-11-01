@@ -32,7 +32,6 @@ const mockHabits: Habit[] = [
 describe('TodayPage', () => {
   let component: TodayPage;
   let fixture: ComponentFixture<TodayPage>;
-  let habitService: HabitService;
   let mockHabitsSignal: WritableSignal<readonly Habit[]>;
   let mockHabitService: Partial<HabitService>;
 
@@ -58,7 +57,6 @@ describe('TodayPage', () => {
       ],
     }).compileComponents();
 
-    habitService = TestBed.inject(HabitService);
     fixture = TestBed.createComponent(TodayPage);
     component = fixture.componentInstance;
     await fixture.whenStable();
@@ -122,6 +120,7 @@ describe('TodayPage', () => {
     expect(el.textContent).toContain(mockHabitsSignal()[2].name);
     expect(el.textContent).not.toContain(mockHabitsSignal()[0].name);
     expect(el.textContent).not.toContain(mockHabitsSignal()[1].name);
+    expect(el.textContent).toContain('Thursday, October 29');
 
     await vi.advanceTimersByTimeAsync(60_000);
 
@@ -130,5 +129,6 @@ describe('TodayPage', () => {
     expect(el.textContent).toContain(mockHabitsSignal()[0].name);
     expect(el.textContent).toContain(mockHabitsSignal()[2].name);
     expect(el.textContent).not.toContain(mockHabitsSignal()[1].name);
+    expect(el.textContent).toContain('Friday, October 30');
   });
 });
