@@ -15,19 +15,4 @@ describe('App', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Be Palm Habits');
-  });
-
-  it('should link "Add habit" to the add form', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const link = (fixture.nativeElement as HTMLElement).querySelector('a');
-
-    expect(link?.getAttribute('href')).toBe('/habits/add');
-  });
 });

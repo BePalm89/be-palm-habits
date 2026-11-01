@@ -3,6 +3,7 @@ import { TodayPage } from './today-page';
 import { HabitService } from '../../habits/service/habit';
 import { type Habit } from '../../habits/habit.model';
 import { signal, WritableSignal } from '@angular/core';
+import { provideRouter } from '@angular/router';
 
 const mockHabits: Habit[] = [
   {
@@ -53,6 +54,7 @@ describe('TodayPage', () => {
           provide: HabitService,
           useValue: mockHabitService,
         },
+        provideRouter([]),
       ],
     }).compileComponents();
 
@@ -77,9 +79,10 @@ describe('TodayPage', () => {
 
     fixture.detectChanges();
 
-    const emptyMessageP = el.querySelector('p');
+    const numberOfLi = el.querySelectorAll('li').length;
 
-    expect(emptyMessageP?.textContent.trim()).toBe('No habits for today');
+    expect(el.textContent).toContain('No habits for today');
+    expect(numberOfLi).toBe(0);
   });
 
   it('displays the new habits when added a new one', async () => {
