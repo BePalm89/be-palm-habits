@@ -15,6 +15,16 @@
   --color-streak-text: #6b4300;
   --color-tab-bar: #ffffff;
   --color-border: #dde3ee;
+  --color-category-study-bg: #dce6ff;
+  --color-category-study-text: #2152d6;
+  --color-category-reading-bg: #fbebcf;
+  --color-category-reading-text: #6b4300;
+  --color-category-health-bg: #e8e1fb;
+  --color-category-health-text: #5b3fb5;
+  --color-category-sport-bg: #f9e0ea;
+  --color-category-sport-text: #9c2c5a;
+  --color-category-cats-bg: #d5f0ec;
+  --color-category-cats-text: #0f6b60;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +39,16 @@
     --color-streak-text: #f3c774;
     --color-tab-bar: #121b2e;
     --color-border: #26314a;
+    --color-category-study-bg: #22325e;
+    --color-category-study-text: #9db8ff;
+    --color-category-reading-bg: #3a2c12;
+    --color-category-reading-text: #f3c774;
+    --color-category-health-bg: #2c2452;
+    --color-category-health-text: #c2b2ff;
+    --color-category-sport-bg: #3e1f2d;
+    --color-category-sport-text: #f5a3c3;
+    --color-category-cats-bg: #133a36;
+    --color-category-cats-text: #7fd9cb;
   }
 }
 
@@ -63,4 +83,8 @@ textarea {
 p,
 h1 {
   margin: 0;
+}
+
+ul {
+  list-style: none;
 }

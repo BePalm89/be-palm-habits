@@ -1,8 +1,9 @@
 import { Component, input } from '@angular/core';
 import { Habit } from '../../habits/habit.model';
+import { AvatarCategory } from '../../shared/avatar-category/avatar-category';
 
 @Component({
-  imports: [],
+  imports: [AvatarCategory],
   selector: 'app-today-habit-row',
   styleUrl: './today-habit-row.css',
   templateUrl: './today-habit-row.html',

@@ -1,0 +1,35 @@
+:host {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:host([data-category='study']) {
+  background-color: var(--color-category-study-bg);
+  color: var(--color-category-study-text);
+}
+
+:host([data-category='reading']) {
+  background-color: var(--color-category-reading-bg);
+  color: var(--color-reading-reading-text);
+}
+
+:host([data-category='health']) {
+  background-color: var(--color-category-health-bg);
+  color: var(--color-category-health-text);
+}
+
+:host([data-category='sport']) {
+  background-color: var(--color-category-sport-bg);
+  color: var(--color-category-sport-text);
+}
+
+:host([data-category='cats']) {
+  background-color: var(--color-category-cats-bg);
+  color: var(--color-category-cats-text);
+}

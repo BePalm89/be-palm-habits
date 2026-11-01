@@ -4,3 +4,11 @@
   gap: 18px;
   padding: 28px 20px 16px;
 }
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
