@@ -6,3 +6,10 @@
 >
   Delete
 </button>
+<a
+  [routerLink]="[habit().id, 'edit']"
+  aria-label="Edit habit"
+  [attr.aria-label]="'edit ' + habit().name"
+>
+  <svg lucideSquarePen [size]="22" [strokeWidth]="2.4"></svg>
+</a>

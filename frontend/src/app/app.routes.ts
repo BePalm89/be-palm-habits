@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
 import { HabitList } from './features/habits/habit-list/habit-list';
-import { AddHabitForm } from './features/habits/add-habit-form/add-habit-form';
 import { TodayPage } from './features/today/today-page/today-page';
 import { StatsPage } from './features/stats/stats-page/stats-page';
 import { CoachPage } from './features/coach/coach-page/coach-page';
+import { EditHabit } from './features/habits/edit-habit/edit-habit';
+import { NewHabit } from './features/habits/new-habit/new-habit';
 
 export const routes: Routes = [
   {
@@ -13,12 +14,22 @@ export const routes: Routes = [
   },
   {
     path: 'habits',
-    component: HabitList,
+    children: [
+      {
+        path: '',
+        component: HabitList,
+      },
+      {
+        path: 'add',
+        component: NewHabit,
+      },
+      {
+        path: ':id/edit',
+        component: EditHabit,
+      },
+    ],
   },
-  {
-    path: 'habits/add',
-    component: AddHabitForm,
-  },
+
   {
     path: 'stats',
     component: StatsPage,
