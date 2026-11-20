@@ -1,9 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { HabitRow } from '../habit-row/habit-row';
 import { HabitService } from '../service/habit';
+import { LucidePlus } from '@lucide/angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [HabitRow],
+  imports: [HabitRow, LucidePlus, RouterLink],
   selector: 'app-habit-list',
   styleUrl: './habit-list.css',
   templateUrl: './habit-list.html',

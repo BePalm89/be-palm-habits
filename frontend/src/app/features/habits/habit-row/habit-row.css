@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .name {
+    margin: 0;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .meta {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  a,
+  button {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+}

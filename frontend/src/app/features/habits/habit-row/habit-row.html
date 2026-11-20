@@ -1,15 +1,18 @@
-<p>{{ habit().name }} ({{ habit().category }})</p>
+<app-avatar-category [category]="habit().category" aria-hidden="true" />
+
+<div class="info">
+  <p class="name">{{ habit().name }}</p>
+  <p class="meta">{{ habit().category }}</p>
+</div>
+
+<a [routerLink]="[habit().id, 'edit']" [attr.aria-label]="'Edit ' + habit().name">
+  <svg lucideSquarePen [size]="20" [strokeWidth]="2"></svg>
+</a>
+
 <button
-  [attr.aria-label]="'delete ' + habit().name"
   type="button"
+  [attr.aria-label]="'Delete ' + habit().name"
   (click)="delete.emit(habit().id)"
 >
-  Delete
+  <svg lucideTrash [size]="20" [strokeWidth]="2"></svg>
 </button>
-<a
-  [routerLink]="[habit().id, 'edit']"
-  aria-label="Edit habit"
-  [attr.aria-label]="'edit ' + habit().name"
->
-  <svg lucideSquarePen [size]="22" [strokeWidth]="2.4"></svg>
-</a>

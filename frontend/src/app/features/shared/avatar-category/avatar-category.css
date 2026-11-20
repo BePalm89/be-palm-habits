@@ -16,7 +16,7 @@
 
 :host([data-category='reading']) {
   background-color: var(--color-category-reading-bg);
-  color: var(--color-reading-reading-text);
+  color: var(--color-category-reading-text);
 }
 
 :host([data-category='health']) {
