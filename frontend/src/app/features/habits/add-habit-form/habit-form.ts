@@ -12,11 +12,11 @@ interface AddHabitFormInterface {
 
 @Component({
   imports: [RouterLink, FormField, FormRoot],
-  selector: 'app-add-habit-form',
-  styleUrl: './add-habit-form.css',
-  templateUrl: './add-habit-form.html',
+  selector: 'app-habit-form',
+  styleUrl: './habit-form.css',
+  templateUrl: './habit-form.html',
 })
-export class AddHabitForm {
+export class HabitForm {
   protected readonly categories = CATEGORIES;
   protected readonly addHabitFormModel = signal<AddHabitFormInterface>({
     name: '',

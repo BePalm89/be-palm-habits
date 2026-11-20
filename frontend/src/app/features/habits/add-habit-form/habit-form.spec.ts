@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AddHabitForm } from './add-habit-form';
+import { HabitForm } from './habit-form';
 import { provideRouter } from '@angular/router';
 import { HabitService } from '../service/habit';
 
-describe('AddHabitForm', () => {
-  let component: AddHabitForm;
-  let fixture: ComponentFixture<AddHabitForm>;
+describe('HabitForm', () => {
+  let component: HabitForm;
+  let fixture: ComponentFixture<HabitForm>;
   let habitService: HabitService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddHabitForm],
+      imports: [HabitForm],
       providers: [provideRouter([{ path: 'habits', children: [] }])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddHabitForm);
+    fixture = TestBed.createComponent(HabitForm);
     component = fixture.componentInstance;
     habitService = TestBed.inject(HabitService);
 
