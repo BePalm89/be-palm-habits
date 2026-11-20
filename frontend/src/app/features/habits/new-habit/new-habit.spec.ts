@@ -20,4 +20,29 @@ describe('NewHabit', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('displays a link with close icon to return to the today page', () => {
+    const el = fixture.nativeElement as HTMLElement;
+
+    const closeHabitLink = el.querySelector('[aria-label="Close"]');
+
+    expect(closeHabitLink?.getAttribute('href')).toBe('/');
+  });
+
+  it('displays a heading with text new habit', () => {
+    const el = fixture.nativeElement as HTMLElement;
+
+    const heading = el.querySelector('h1');
+
+    expect(heading?.textContent).toBe('New habit');
+  });
+
+  it('displays a label with text name', () => {
+    const el = fixture.nativeElement as HTMLElement;
+
+    const label = el.querySelector('label');
+
+    expect(label).not.toBeNull();
+    expect(label?.textContent).toContain('Name');
+  });
 });
