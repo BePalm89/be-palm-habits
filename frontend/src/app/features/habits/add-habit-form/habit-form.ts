@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, required, validate } from '@angular/forms/signals';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { isBlank } from '../validators/is-blank';
 import { CATEGORIES, Category } from '../habit.model';
 import { HabitService } from '../service/habit';
@@ -11,7 +11,7 @@ interface AddHabitFormInterface {
 }
 
 @Component({
-  imports: [RouterLink, FormField, FormRoot],
+  imports: [FormField, FormRoot],
   selector: 'app-habit-form',
   styleUrl: './habit-form.css',
   templateUrl: './habit-form.html',

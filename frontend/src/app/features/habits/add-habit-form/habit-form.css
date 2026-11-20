@@ -1,0 +1,57 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  label {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  input,
+  select {
+    height: 52px;
+    box-sizing: border-box;
+    padding: 0 14px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 14px;
+    background-color: var(--color-surface);
+    font: inherit;
+    font-size: 16px;
+    color: inherit;
+
+    &:focus-visible {
+      outline: none;
+      border-color: var(--color-focus);
+      box-shadow: 0 0 0 1px var(--color-focus);
+    }
+
+    &[aria-invalid='true'] {
+      border-color: var(--color-error);
+    }
+  }
+
+  .field p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-error);
+  }
+
+  button[type='submit'] {
+    height: 56px;
+    border: 0;
+    border-radius: 16px;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+  }
+}
