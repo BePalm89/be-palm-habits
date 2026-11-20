@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HabitRow } from './habit-row';
 import { inputBinding, outputBinding, signal } from '@angular/core';
 import { Habit } from '../habit.model';
+import { provideRouter } from '@angular/router';
 
 const habit: Habit = {
   id: 'id',
@@ -20,6 +21,7 @@ describe('HabitRow', () => {
     emittedId = undefined;
     await TestBed.configureTestingModule({
       imports: [HabitRow],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HabitRow, {

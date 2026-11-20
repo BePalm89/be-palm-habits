@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HabitList } from './habit-list';
+import { provideRouter } from '@angular/router';
 
 describe('HabitList', () => {
   let component: HabitList;
@@ -8,6 +9,7 @@ describe('HabitList', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HabitList],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HabitList);

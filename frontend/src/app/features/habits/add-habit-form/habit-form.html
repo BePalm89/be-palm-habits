@@ -1,38 +1,42 @@
 <form [formRoot]="addHabitForm">
-  <label for="name">Name:</label>
-  <input
-    id="name"
-    type="text"
-    [formField]="addHabitForm.name"
-    [attr.aria-invalid]="addHabitForm.name().touched() && addHabitForm.name().invalid()"
-    [attr.aria-describedby]="addHabitForm.name().touched() ? 'name-errors' : null"
-  />
-  @if (addHabitForm.name().touched()) {
-    <div id="name-errors">
-      @for (error of addHabitForm.name().errors(); track error.kind) {
-        <p>{{ error.message }}</p>
-      }
-    </div>
-  }
-
-  <label for="category">Category:</label>
-  <select
-    id="category"
-    [formField]="addHabitForm.category"
-    [attr.aria-invalid]="addHabitForm.category().touched() && addHabitForm.category().invalid()"
-    [attr.aria-describedby]="addHabitForm.category().touched() ? 'category-errors' : null"
-  >
-    <option value="">Please choose a category</option>
-    @for (category of categories; track category) {
-      <option [value]="category">{{ category }}</option>
+  <div class="field">
+    <label for="name">Name:</label>
+    <input
+      id="name"
+      type="text"
+      [formField]="addHabitForm.name"
+      [attr.aria-invalid]="addHabitForm.name().touched() && addHabitForm.name().invalid()"
+      [attr.aria-describedby]="addHabitForm.name().touched() ? 'name-errors' : null"
+    />
+    @if (addHabitForm.name().touched()) {
+      <div id="name-errors">
+        @for (error of addHabitForm.name().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
     }
-  </select>
-  @if (addHabitForm.category().touched()) {
-    <div id="category-errors">
-      @for (error of addHabitForm.category().errors(); track error.kind) {
-        <p>{{ error.message }}</p>
+  </div>
+  <div class="field">
+    <label for="category">Category:</label>
+    <select
+      id="category"
+      [formField]="addHabitForm.category"
+      [attr.aria-invalid]="addHabitForm.category().touched() && addHabitForm.category().invalid()"
+      [attr.aria-describedby]="addHabitForm.category().touched() ? 'category-errors' : null"
+    >
+      <option value="">Please choose a category</option>
+      @for (category of categories; track category) {
+        <option [value]="category">{{ category }}</option>
       }
-    </div>
-  }
-  <button type="submit">Save</button>
+    </select>
+    @if (addHabitForm.category().touched()) {
+      <div id="category-errors">
+        @for (error of addHabitForm.category().errors(); track error.kind) {
+          <p>{{ error.message }}</p>
+        }
+      </div>
+    }
+  </div>
+
+  <button type="submit">Create habit</button>
 </form>
