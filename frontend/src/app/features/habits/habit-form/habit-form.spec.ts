@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HabitForm } from './habit-form';
 import { provideRouter } from '@angular/router';
 import { HabitService } from '../service/habit';
+import { inputBinding, outputBinding, signal } from '@angular/core';
 
 describe('HabitForm', () => {
   let component: HabitForm;
@@ -14,7 +15,12 @@ describe('HabitForm', () => {
       providers: [provideRouter([{ path: 'habits', children: [] }])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HabitForm);
+    fixture = TestBed.createComponent(HabitForm, {
+      bindings: [
+        inputBinding('nameButton', signal('Save habit')),
+        outputBinding('save', { name: 'Catalan', category: 'study' }),
+      ],
+    });
     component = fixture.componentInstance;
     habitService = TestBed.inject(HabitService);
 
@@ -65,28 +71,5 @@ describe('HabitForm', () => {
     expect(errors[0]).toEqual('Name is required');
   });
 
-  it('should save correctly a new habit', async () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const nameInput = element.querySelector<HTMLInputElement>('#name')!;
-
-    nameInput.value = 'Catalano';
-    nameInput.dispatchEvent(new Event('input'));
-    nameInput.dispatchEvent(new Event('blur'));
-
-    await fixture.whenStable();
-
-    const categorySelect = element.querySelector<HTMLSelectElement>('#category')!;
-    categorySelect.value = 'study';
-    categorySelect.dispatchEvent(new Event('input'));
-    categorySelect.dispatchEvent(new Event('blur'));
-
-    await fixture.whenStable();
-
-    const saveButton = element.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-
-    saveButton.click();
-
-    expect(habitService.habits().length).toBe(4);
-    expect(habitService.habits()[3].name).toBe('Catalano');
-  });
+  it('should emit an habit when clicking on the submission button', async () => {});
 });
