@@ -7,7 +7,11 @@
 
 <section>
   @if (habit()) {
-    <app-habit-form [habit]="habit()"></app-habit-form>
+    <app-habit-form
+      [habit]="habit()"
+      nameButton="Save changes"
+      (save)="edit($event)"
+    ></app-habit-form>
   } @else {
     <div class="no-habit">
       <p>Habit not found</p>

@@ -1,9 +1,7 @@
-import { Component, inject, input, linkedSignal } from '@angular/core';
+import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, required, validate } from '@angular/forms/signals';
-import { Router } from '@angular/router';
 import { isBlank } from '../validators/is-blank';
 import { CATEGORIES, Category, Habit } from '../habit.model';
-import { HabitService } from '../service/habit';
 
 interface AddHabitFormInterface {
   name: string;
@@ -18,13 +16,14 @@ interface AddHabitFormInterface {
 })
 export class HabitForm {
   readonly habit = input<Habit>();
+  readonly nameButton = input.required<string>();
+  readonly save = output<Pick<Habit, 'name' | 'category'>>();
+
   protected readonly categories = CATEGORIES;
   protected readonly addHabitFormModel = linkedSignal<AddHabitFormInterface>(() => ({
     name: this.habit()?.name ?? '',
     category: this.habit()?.category ?? '',
   }));
-  private readonly habitsService = inject(HabitService);
-  private readonly router = inject(Router);
 
   protected readonly addHabitForm = form(
     this.addHabitFormModel,
@@ -53,8 +52,7 @@ export class HabitForm {
           const { name, category } = f().value();
 
           if (category === '') return;
-          this.habitsService.add({ name, category });
-          this.router.navigate(['/habits']);
+          this.save.emit({ name, category });
         },
       },
     },

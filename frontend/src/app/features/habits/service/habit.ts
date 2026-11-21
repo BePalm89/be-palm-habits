@@ -44,4 +44,10 @@ export class HabitService {
 
     this._habits.update((habits) => [...habits, newHabit]);
   }
+
+  edit(id: string, habit: Pick<Habit, 'name' | 'category'>) {
+    this._habits.update((habits) =>
+      habits.map((h) => (h.id === id ? { ...h, ...habit, name: habit.name.trim() } : h)),
+    );
+  }
 }
