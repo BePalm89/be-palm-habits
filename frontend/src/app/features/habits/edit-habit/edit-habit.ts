@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LucideX, LucideArrowLeft } from '@lucide/angular';
-import { HabitForm } from '../add-habit-form/habit-form';
+import { HabitForm } from '../habit-form/habit-form';
 import { HabitService } from '../service/habit';
 import { Habit } from '../habit.model';
 
@@ -21,7 +21,7 @@ export class EditHabit {
     return this.habitService.habits().find((habit) => habit.id === this.id());
   });
 
-  edit(habit: Pick<Habit, 'name' | 'category'>) {
+  protected edit(habit: Pick<Habit, 'name' | 'category'>) {
     this.habitService.edit(this.id(), habit);
     this.router.navigate(['/habits']);
   }
