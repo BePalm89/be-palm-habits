@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+  }
+}
+
+.no-habit {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 16px;
+    border-radius: 14px;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+}

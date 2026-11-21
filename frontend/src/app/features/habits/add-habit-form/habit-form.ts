@@ -1,8 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, required, validate } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { isBlank } from '../validators/is-blank';
-import { CATEGORIES, Category } from '../habit.model';
+import { CATEGORIES, Category, Habit } from '../habit.model';
 import { HabitService } from '../service/habit';
 
 interface AddHabitFormInterface {
@@ -17,11 +17,12 @@ interface AddHabitFormInterface {
   templateUrl: './habit-form.html',
 })
 export class HabitForm {
+  readonly habit = input<Habit>();
   protected readonly categories = CATEGORIES;
-  protected readonly addHabitFormModel = signal<AddHabitFormInterface>({
-    name: '',
-    category: '',
-  });
+  protected readonly addHabitFormModel = linkedSignal<AddHabitFormInterface>(() => ({
+    name: this.habit()?.name ?? '',
+    category: this.habit()?.category ?? '',
+  }));
   private readonly habitsService = inject(HabitService);
   private readonly router = inject(Router);
 

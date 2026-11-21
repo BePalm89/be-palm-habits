@@ -1,1 +1,20 @@
-<p>edit-habit works!</p>
+<header>
+  <a routerLink="/habits" aria-label="Close">
+    <svg lucideX [size]="22" [strokeWidth]="2.4"></svg>
+  </a>
+  <h1>Edit habit</h1>
+</header>
+
+<section>
+  @if (habit()) {
+    <app-habit-form [habit]="habit()"></app-habit-form>
+  } @else {
+    <div class="no-habit">
+      <p>Habit not found</p>
+      <a routerLink="/habits">
+        <svg lucideArrowLeft [size]="22" [strokeWidth]="2.4" aria-hidden="true"></svg>
+        Go back to habits
+      </a>
+    </div>
+  }
+</section>
