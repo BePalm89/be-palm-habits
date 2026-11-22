@@ -76,6 +76,10 @@
       }
     </fieldset>
   }
+  <div class="field">
+    <label for="reminder">Reminder (optional):</label>
+    <input id="reminder" type="time" [formField]="addHabitForm.reminder" />
+  </div>
 
   <button type="submit">{{ nameButton() }}</button>
 </form>

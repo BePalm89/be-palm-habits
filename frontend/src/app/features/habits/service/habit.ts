@@ -1,5 +1,5 @@
 import { Service, signal } from '@angular/core';
-import { EVERY_DAY, Habit, HabitDraft } from '../habit.model';
+import { Habit, HabitDraft } from '../habit.model';
 
 @Service()
 export class HabitService {
@@ -38,7 +38,7 @@ export class HabitService {
       name: habit.name.trim(),
       category: habit.category,
       id: crypto.randomUUID(),
-      reminder: null,
+      reminder: habit.reminder,
       scheduledDays: habit.scheduledDays,
     };
 

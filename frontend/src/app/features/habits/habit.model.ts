@@ -1,5 +1,3 @@
-import { AddHabitFormInterface } from './habit-form/habit-form';
-
 export const CATEGORIES = ['study', 'health', 'sport', 'cats', 'reading'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -15,6 +13,6 @@ export type Habit = {
 
 export type When = 'every-day' | 'chosen-days';
 
-export type HabitDraft = Pick<Habit, 'name' | 'category' | 'scheduledDays'>;
+export type HabitDraft = Pick<Habit, 'name' | 'category' | 'scheduledDays' | 'reminder'>;
 
-export type HabitSchedule = Pick<AddHabitFormInterface, 'when' | 'days'>;
+export type HabitSchedule = { when: When; days: boolean[] };

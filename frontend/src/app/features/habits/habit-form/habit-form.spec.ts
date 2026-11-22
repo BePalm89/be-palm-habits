@@ -83,10 +83,31 @@ describe('HabitForm', () => {
     expect(errors[0]).toBe('Name is required');
   });
 
-  it('should emit name, category and every day when submitting a valid form', async () => {
+  it('should emit name, category, every day and a reminder null when submitting a valid form', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
     await fillValidNameAndCategory(element);
+
+    element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
+    await fixture.whenStable();
+
+    expect(emittedHabit).toEqual({
+      name: 'Coding kata',
+      category: 'study',
+      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      reminder: null,
+    });
+  });
+
+  it('should emit name, category, every day and a reminder when submitting a valid form', async () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    await fillValidNameAndCategory(element);
+
+    const reminderInput = element.querySelector<HTMLInputElement>('#reminder')!;
+
+    reminderInput.value = '07:30';
+    reminderInput.dispatchEvent(new Event('input'));
 
     await fixture.whenStable();
 
@@ -97,6 +118,7 @@ describe('HabitForm', () => {
       name: 'Coding kata',
       category: 'study',
       scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      reminder: '07:30',
     });
   });
 
@@ -127,6 +149,7 @@ describe('HabitForm', () => {
       name: 'Coding kata',
       category: 'study',
       scheduledDays: [0, 2, 4],
+      reminder: null,
     });
   });
 

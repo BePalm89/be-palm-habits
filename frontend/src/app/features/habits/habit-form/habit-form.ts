@@ -9,6 +9,7 @@ export interface AddHabitFormInterface {
   category: Category | '';
   when: When;
   days: boolean[];
+  reminder: string;
 }
 
 @Component({
@@ -41,6 +42,7 @@ export class HabitForm {
         category: '',
         when: 'every-day',
         days: [false, false, false, false, false, false, false],
+        reminder: '',
       };
     }
 
@@ -48,6 +50,7 @@ export class HabitForm {
       name: habit.name,
       category: habit.category,
       ...fromScheduledDays(habit.scheduledDays),
+      reminder: habit.reminder ?? '',
     };
   });
 
@@ -85,12 +88,12 @@ export class HabitForm {
     {
       submission: {
         action: async (f) => {
-          const { name, category, when, days } = f().value();
+          const { name, category, when, days, reminder } = f().value();
 
           const scheduledDays = toScheduledDays(when, days);
 
           if (category === '') return;
-          this.save.emit({ name, category, scheduledDays });
+          this.save.emit({ name, category, scheduledDays, reminder: reminder || null });
         },
       },
     },

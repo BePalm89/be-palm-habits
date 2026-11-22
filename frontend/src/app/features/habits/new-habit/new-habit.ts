@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LucideX } from '@lucide/angular';
 import { HabitForm } from '../habit-form/habit-form';
-import { Habit, HabitDraft } from '../habit.model';
+import { HabitDraft } from '../habit.model';
 import { HabitService } from '../service/habit';
 
 @Component({

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HabitService } from './habit';
-import { EVERY_DAY, Habit, HabitDraft } from '../habit.model';
+import { EVERY_DAY, HabitDraft } from '../habit.model';
 
 describe('HabitService', () => {
   let service: HabitService;
@@ -35,6 +35,7 @@ describe('HabitService', () => {
       name: '    Catalano   ',
       category: 'study',
       scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      reminder: null,
     };
 
     service.add(newHabit);
@@ -50,6 +51,7 @@ describe('HabitService', () => {
       name: '    Coding kata   ',
       category: 'reading',
       scheduledDays: [0, 2, 4],
+      reminder: '07:00',
     };
 
     service.edit('id1', updatedHabit);
@@ -62,7 +64,7 @@ describe('HabitService', () => {
     expect(habit?.category).toBe('reading');
 
     expect(habit?.id).toBe('id1');
-    expect(habit?.reminder).toBe('07:30');
+    expect(habit?.reminder).toBe('07:00');
     expect(habit?.scheduledDays).toEqual([0, 2, 4]);
   });
 });
