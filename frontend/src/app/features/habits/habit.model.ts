@@ -1,3 +1,5 @@
+import { AddHabitFormInterface } from './habit-form/habit-form';
+
 export const CATEGORIES = ['study', 'health', 'sport', 'cats', 'reading'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -10,3 +12,9 @@ export type Habit = {
   reminder: string | null; // "HH:mm" (24h), null = no reminder
   scheduledDays: number[]; // 0 = Monday … 6 = Sunday (≠ Date.getDay(), where 0 = Sunday!)
 };
+
+export type When = 'every-day' | 'chosen-days';
+
+export type HabitDraft = Pick<Habit, 'name' | 'category' | 'scheduledDays'>;
+
+export type HabitSchedule = Pick<AddHabitFormInterface, 'when' | 'days'>;

@@ -14,7 +14,7 @@ form {
     font-size: 15px;
   }
 
-  input,
+  input:not([type='radio'], [type='checkbox']),
   select {
     height: 52px;
     box-sizing: border-box;
@@ -41,6 +41,91 @@ form {
     margin: 0;
     font-size: 13px;
     color: var(--color-error);
+  }
+
+  fieldset.choice {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-inline-size: 0;
+
+    legend {
+      padding: 0;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    p {
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--color-error);
+    }
+  }
+
+  .segmented,
+  .days {
+    display: grid;
+
+    label {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+
+      &:has(input:focus-visible) {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 2px;
+      }
+    }
+
+    input {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  .segmented {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 4px;
+    border-radius: 14px;
+    background-color: var(--color-surface);
+
+    label {
+      border-radius: 11px;
+
+      &:has(input:checked) {
+        background-color: var(--color-text);
+        color: var(--color-bg);
+        font-weight: 700;
+      }
+    }
+  }
+
+  .days {
+    grid-template-columns: repeat(7, minmax(0, 44px));
+    justify-content: space-between;
+    gap: 6px;
+
+    label {
+      border-radius: 12px;
+      background-color: var(--color-surface);
+
+      &:has(input:checked) {
+        background-color: var(--color-accent);
+        color: var(--color-on-accent);
+        font-weight: 700;
+      }
+    }
   }
 
   button[type='submit'] {

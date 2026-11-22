@@ -38,5 +38,40 @@
     }
   </div>
 
+  <fieldset class="choice">
+    <legend>When</legend>
+    <div class="segmented">
+      <label>
+        <input type="radio" value="every-day" [formField]="addHabitForm.when" />
+        Every day
+      </label>
+      <label>
+        <input type="radio" value="chosen-days" [formField]="addHabitForm.when" />
+        Chosen days
+      </label>
+    </div>
+  </fieldset>
+
+  @if (addHabitForm.when().value() === 'chosen-days') {
+    <fieldset class="choice">
+      <legend>Choose your days</legend>
+      <div class="days">
+        @for (day of DAYS; track $index) {
+          <label>
+            <input type="checkbox" [formField]="addHabitForm.days[$index]" />
+            {{ day }}
+          </label>
+        }
+      </div>
+      @if (addHabitForm.days().touched()) {
+        <div id="days-errors">
+          @for (error of addHabitForm.days().errors(); track error.kind) {
+            <p>{{ error.message }}</p>
+          }
+        </div>
+      }
+    </fieldset>
+  }
+
   <button type="submit">{{ nameButton() }}</button>
 </form>

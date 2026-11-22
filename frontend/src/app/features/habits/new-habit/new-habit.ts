@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LucideX } from '@lucide/angular';
 import { HabitForm } from '../habit-form/habit-form';
-import { Habit } from '../habit.model';
+import { Habit, HabitDraft } from '../habit.model';
 import { HabitService } from '../service/habit';
 
 @Component({
@@ -15,7 +15,7 @@ export class NewHabit {
   private readonly habitsService = inject(HabitService);
   private readonly router = inject(Router);
 
-  protected add(habit: Pick<Habit, 'name' | 'category'>) {
+  protected add(habit: HabitDraft) {
     this.habitsService.add(habit);
     this.router.navigate(['/habits']);
   }

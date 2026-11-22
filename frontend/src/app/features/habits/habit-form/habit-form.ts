@@ -1,11 +1,14 @@
 import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, required, validate } from '@angular/forms/signals';
 import { isBlank } from '../validators/is-blank';
-import { CATEGORIES, Category, Habit } from '../habit.model';
+import { CATEGORIES, Category, Habit, HabitDraft, When } from '../habit.model';
+import { fromScheduledDays, toScheduledDays } from '../utils/scheduled-days';
 
-interface AddHabitFormInterface {
+export interface AddHabitFormInterface {
   name: string;
   category: Category | '';
+  when: When;
+  days: boolean[];
 }
 
 @Component({
@@ -17,13 +20,28 @@ interface AddHabitFormInterface {
 export class HabitForm {
   readonly habit = input<Habit>();
   readonly nameButton = input.required<string>();
-  readonly save = output<Pick<Habit, 'name' | 'category'>>();
+  readonly save = output<HabitDraft>();
+  protected DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   protected readonly categories = CATEGORIES;
-  protected readonly addHabitFormModel = linkedSignal<AddHabitFormInterface>(() => ({
-    name: this.habit()?.name ?? '',
-    category: this.habit()?.category ?? '',
-  }));
+  protected readonly addHabitFormModel = linkedSignal<AddHabitFormInterface>(() => {
+    const habit = this.habit();
+
+    if (!habit) {
+      return {
+        name: '',
+        category: '',
+        when: 'every-day',
+        days: [false, false, false, false, false, false, false],
+      };
+    }
+
+    return {
+      name: habit.name,
+      category: habit.category,
+      ...fromScheduledDays(habit.scheduledDays),
+    };
+  });
 
   protected readonly addHabitForm = form(
     this.addHabitFormModel,
@@ -45,14 +63,26 @@ export class HabitForm {
           : null;
       });
       required(schemaPath.category, { message: 'Category is required' });
+      validate(schemaPath.days, ({ value, valueOf }) => {
+        const when = valueOf(schemaPath.when);
+        const days = value();
+
+        if (when === 'chosen-days' && !days.some((day) => day)) {
+          return { kind: 'atLeastOne', message: 'Choose at least one day' };
+        }
+
+        return null;
+      });
     },
     {
       submission: {
         action: async (f) => {
-          const { name, category } = f().value();
+          const { name, category, when, days } = f().value();
+
+          const scheduledDays = toScheduledDays(when, days);
 
           if (category === '') return;
-          this.save.emit({ name, category });
+          this.save.emit({ name, category, scheduledDays });
         },
       },
     },

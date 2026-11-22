@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LucideX, LucideArrowLeft } from '@lucide/angular';
 import { HabitForm } from '../habit-form/habit-form';
 import { HabitService } from '../service/habit';
-import { Habit } from '../habit.model';
+import { Habit, HabitDraft } from '../habit.model';
 
 @Component({
   imports: [RouterLink, LucideX, HabitForm, LucideArrowLeft],
@@ -21,7 +21,7 @@ export class EditHabit {
     return this.habitService.habits().find((habit) => habit.id === this.id());
   });
 
-  protected edit(habit: Pick<Habit, 'name' | 'category'>) {
+  protected edit(habit: HabitDraft) {
     this.habitService.edit(this.id(), habit);
     this.router.navigate(['/habits']);
   }
