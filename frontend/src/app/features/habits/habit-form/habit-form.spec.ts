@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { inputBinding, outputBinding, signal } from '@angular/core';
 import { HabitForm } from './habit-form';
-import { Habit } from '../habit.model';
+import { Habit, HabitDraft } from '../habit.model';
 
 describe('HabitForm', () => {
   let component: HabitForm;
   let fixture: ComponentFixture<HabitForm>;
-  let emittedHabit: Pick<Habit, 'name' | 'category'> | undefined;
+  let emittedHabit: HabitDraft | undefined;
 
   beforeEach(async () => {
     emittedHabit = undefined;
@@ -18,7 +18,7 @@ describe('HabitForm', () => {
     fixture = TestBed.createComponent(HabitForm, {
       bindings: [
         inputBinding('nameButton', signal('Save habit')),
-        outputBinding('save', (value: Pick<Habit, 'name' | 'category'>) => {
+        outputBinding('save', (value: HabitDraft) => {
           emittedHabit = value;
         }),
       ],
@@ -70,7 +70,7 @@ describe('HabitForm', () => {
     expect(errors[0]).toBe('Name is required');
   });
 
-  it('should emit name and category when submitting a valid form', async () => {
+  it('should emit name, category and every day when submitting a valid form', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
     const nameInput = element.querySelector<HTMLInputElement>('#name')!;
@@ -87,6 +87,10 @@ describe('HabitForm', () => {
     element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
     await fixture.whenStable();
 
-    expect(emittedHabit).toEqual({ name: 'Coding kata', category: 'study' });
+    expect(emittedHabit).toEqual({
+      name: 'Coding kata',
+      category: 'study',
+      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+    });
   });
 });
