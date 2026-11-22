@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { inputBinding, outputBinding, signal } from '@angular/core';
 import { HabitForm } from './habit-form';
-import { Habit, HabitDraft } from '../habit.model';
+import { HabitDraft } from '../habit.model';
 
 describe('HabitForm', () => {
   let component: HabitForm;
@@ -27,6 +27,19 @@ describe('HabitForm', () => {
 
     await fixture.whenStable();
   });
+
+  async function fillValidNameAndCategory(element: HTMLElement) {
+    const nameInput = element.querySelector<HTMLInputElement>('#name')!;
+    const categorySelect = element.querySelector<HTMLSelectElement>('#category')!;
+
+    nameInput.value = 'Coding kata';
+    nameInput.dispatchEvent(new Event('input'));
+
+    categorySelect.value = 'study';
+    categorySelect.dispatchEvent(new Event('input'));
+
+    await fixture.whenStable();
+  }
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -73,14 +86,7 @@ describe('HabitForm', () => {
   it('should emit name, category and every day when submitting a valid form', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
-    const nameInput = element.querySelector<HTMLInputElement>('#name')!;
-    const categorySelect = element.querySelector<HTMLSelectElement>('#category')!;
-
-    nameInput.value = 'Coding kata';
-    nameInput.dispatchEvent(new Event('input'));
-
-    categorySelect.value = 'study';
-    categorySelect.dispatchEvent(new Event('input'));
+    await fillValidNameAndCategory(element);
 
     await fixture.whenStable();
 
@@ -92,5 +98,59 @@ describe('HabitForm', () => {
       category: 'study',
       scheduledDays: [0, 1, 2, 3, 4, 5, 6],
     });
+  });
+
+  it('should emit selected days when submitting chosen days', async () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    await fillValidNameAndCategory(element);
+
+    const chosenDaysRadio = element.querySelector<HTMLInputElement>(
+      'input[type="radio"][value="chosen-days"]',
+    )!;
+
+    chosenDaysRadio.click();
+    await fixture.whenStable();
+
+    const checkboxes = element.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+
+    for (const index of [0, 2, 4]) {
+      checkboxes[index].click();
+    }
+
+    await fixture.whenStable();
+
+    element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
+    await fixture.whenStable();
+
+    expect(emittedHabit).toEqual({
+      name: 'Coding kata',
+      category: 'study',
+      scheduledDays: [0, 2, 4],
+    });
+  });
+
+  it('should not emit and should show an error when submitting chosen days without selecting any day', async () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    await fillValidNameAndCategory(element);
+
+    const chosenDaysRadio = element.querySelector<HTMLInputElement>(
+      'input[type="radio"][value="chosen-days"]',
+    )!;
+
+    chosenDaysRadio.click();
+    await fixture.whenStable();
+
+    element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
+    await fixture.whenStable();
+
+    expect(emittedHabit).toBeUndefined();
+
+    const errors = Array.from(element.querySelectorAll('#days-errors p')).map((p) =>
+      p.textContent?.trim(),
+    );
+
+    expect(errors).toContain('Choose at least one day');
   });
 });
