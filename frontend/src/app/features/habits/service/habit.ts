@@ -9,7 +9,7 @@ export class HabitService {
       name: 'coding training',
       category: 'study',
       reminder: '07:30',
-      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      scheduledDays: [0, 2, 4],
     },
     {
       id: 'id2',
@@ -22,8 +22,8 @@ export class HabitService {
       id: 'id3',
       name: "cleaning cat's stuff",
       category: 'cats',
-      reminder: '08:00',
-      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      reminder: null,
+      scheduledDays: [6],
     },
   ]);
 

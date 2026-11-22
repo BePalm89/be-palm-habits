@@ -37,15 +37,13 @@ describe('TodayHabitRow', () => {
       testHabit: { id: '2', name: 'Drinking water', category: 'health' as Category },
       expected: 'Drinking water',
     },
-  ])('displays $expected when the habitis %name', ({ testHabit, expected }) => {
+  ])('displays $expected when the habits %name', ({ testHabit, expected }) => {
     habit.set(testHabit);
 
     fixture.detectChanges();
 
     const el = fixture.nativeElement as HTMLElement;
-    const avatar = el.querySelector('app-avatar-category');
 
     expect(el.textContent.trim()).toContain(expected);
-    expect(avatar?.getAttribute('aria-hidden')).toBe('true');
   });
 });

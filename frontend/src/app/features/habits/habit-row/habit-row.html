@@ -1,8 +1,8 @@
-<app-avatar-category [category]="habit().category" aria-hidden="true" />
+<app-avatar-category [category]="habit().category" />
 
 <div class="info">
   <p class="name">{{ habit().name }}</p>
-  <p class="meta">{{ habit().category }}</p>
+  <p class="meta">{{ habitScheduleLabel() }}</p>
 </div>
 
 <a [routerLink]="[habit().id, 'edit']" [attr.aria-label]="'Edit ' + habit().name">

@@ -38,11 +38,11 @@ describe('HabitRow', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the name and the category for the habit', () => {
+  it('should display the name and the scheduled data for the habit', () => {
     const el = fixture.nativeElement as HTMLElement;
 
-    expect(el.textContent).toContain(habit.name);
-    expect(el.textContent).toContain(habit.category);
+    expect(el.querySelector('.name')?.textContent?.trim()).toBe('test habit');
+    expect(el.querySelector('.meta')?.textContent?.trim()).toBe('Mon, Wed, Fri · 07:30');
   });
 
   it('should emit the correct id when click on the delete button', async () => {

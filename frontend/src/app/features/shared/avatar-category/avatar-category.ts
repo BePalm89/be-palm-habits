@@ -6,7 +6,11 @@ import { Category } from '../../habits/habit.model';
   selector: 'app-avatar-category',
   styleUrl: './avatar-category.css',
   templateUrl: './avatar-category.html',
-  host: { '[attr.data-category]': 'category()' },
+  host: {
+    role: 'img',
+    '[attr.aria-label]': "'Category: ' + category()",
+    '[attr.data-category]': 'category()',
+  },
 })
 export class AvatarCategory {
   readonly category = input.required<Category>();

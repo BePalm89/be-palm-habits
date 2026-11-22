@@ -27,14 +27,33 @@ describe('AvatarCategory', () => {
   });
 
   it.each([
-    { testCategory: 'study' as Category, expected: 'S' },
-    { testCategory: 'health' as Category, expected: 'H' },
-  ])('displays $expected when the category is ${category}', ({ testCategory, expected }) => {
-    category.set(testCategory);
-    fixture.detectChanges();
+    { testCategory: 'study', expected: 'S' },
+    { testCategory: 'health', expected: 'H' },
+  ] satisfies { testCategory: Category; expected: string }[])(
+    'displays $expected when the category is $testCategory',
+    async ({ testCategory, expected }) => {
+      category.set(testCategory);
+      await fixture.whenStable();
 
-    const el = fixture.nativeElement as HTMLElement;
+      const host = fixture.nativeElement as HTMLElement;
 
-    expect(el.textContent.trim()).toBe(expected);
-  });
+      expect(host.textContent.trim()).toBe(expected);
+    },
+  );
+
+  it.each([
+    { testCategory: 'study', expected: 'Category: study' },
+    { testCategory: 'cats', expected: 'Category: cats' },
+  ] satisfies { testCategory: Category; expected: string }[])(
+    'is announced as an image named "$expected" when the category is $testCategory',
+    async ({ testCategory, expected }) => {
+      category.set(testCategory);
+      await fixture.whenStable();
+
+      const host = fixture.nativeElement as HTMLElement;
+
+      expect(host.getAttribute('role')).toBe('img');
+      expect(host.getAttribute('aria-label')).toBe(expected);
+    },
+  );
 });
