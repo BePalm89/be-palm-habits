@@ -21,7 +21,15 @@ export class HabitForm {
   readonly habit = input<Habit>();
   readonly nameButton = input.required<string>();
   readonly save = output<HabitDraft>();
-  protected DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  protected readonly DAYS = [
+    { short: 'M', label: 'Monday' },
+    { short: 'T', label: 'Tuesday' },
+    { short: 'W', label: 'Wednesday' },
+    { short: 'T', label: 'Thursday' },
+    { short: 'F', label: 'Friday' },
+    { short: 'S', label: 'Saturday' },
+    { short: 'S', label: 'Sunday' },
+  ] as const;
 
   protected readonly categories = CATEGORIES;
   protected readonly addHabitFormModel = linkedSignal<AddHabitFormInterface>(() => {

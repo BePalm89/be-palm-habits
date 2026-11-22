@@ -56,10 +56,14 @@
     <fieldset class="choice">
       <legend>Choose your days</legend>
       <div class="days">
-        @for (day of DAYS; track $index) {
+        @for (day of DAYS; track day.label) {
           <label>
-            <input type="checkbox" [formField]="addHabitForm.days[$index]" />
-            {{ day }}
+            <input
+              type="checkbox"
+              [formField]="addHabitForm.days[$index]"
+              [attr.aria-label]="day.label"
+            />
+            {{ day.short }}
           </label>
         }
       </div>

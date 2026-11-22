@@ -153,4 +153,25 @@ describe('HabitForm', () => {
 
     expect(errors).toContain('Choose at least one day');
   });
+
+  it('should give each day checkbox its full day name', async () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    element.querySelector<HTMLInputElement>('input[type="radio"][value="chosen-days"]')!.click();
+    await fixture.whenStable();
+
+    const labels = Array.from(
+      element.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
+    ).map((checkbox) => checkbox.getAttribute('aria-label'));
+
+    expect(labels).toEqual([
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ]);
+  });
 });
