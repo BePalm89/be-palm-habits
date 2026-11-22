@@ -11,7 +11,6 @@ describe('HabitForm', () => {
   beforeEach(async () => {
     emittedHabit = undefined;
 
-    // 1. niente provideRouter né HabitService: il form non li usa più
     await TestBed.configureTestingModule({
       imports: [HabitForm],
     }).compileComponents();
@@ -57,7 +56,6 @@ describe('HabitForm', () => {
     expect(errors).toEqual(expectedErrors);
   });
 
-  // 2. il nome dice cosa verifichiamo davvero ora: niente emit + errore visibile
   it('should not emit and should show "Name is required" when submitting an empty form', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
@@ -68,7 +66,6 @@ describe('HabitForm', () => {
       p.textContent?.trim(),
     );
 
-    // 3. al posto di habits().length: il form non deve aver emesso niente
     expect(emittedHabit).toBeUndefined();
     expect(errors[0]).toBe('Name is required');
   });
