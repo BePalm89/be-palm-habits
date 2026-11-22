@@ -1,28 +1,30 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HabitForm } from './habit-form';
-import { provideRouter } from '@angular/router';
-import { HabitService } from '../service/habit';
 import { inputBinding, outputBinding, signal } from '@angular/core';
+import { HabitForm } from './habit-form';
+import { Habit } from '../habit.model';
 
 describe('HabitForm', () => {
   let component: HabitForm;
   let fixture: ComponentFixture<HabitForm>;
-  let habitService: HabitService;
+  let emittedHabit: Pick<Habit, 'name' | 'category'> | undefined;
 
   beforeEach(async () => {
+    emittedHabit = undefined;
+
+    // 1. niente provideRouter né HabitService: il form non li usa più
     await TestBed.configureTestingModule({
       imports: [HabitForm],
-      providers: [provideRouter([{ path: 'habits', children: [] }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HabitForm, {
       bindings: [
         inputBinding('nameButton', signal('Save habit')),
-        outputBinding('save', { name: 'Catalan', category: 'study' }),
+        outputBinding('save', (value: Pick<Habit, 'name' | 'category'>) => {
+          emittedHabit = value;
+        }),
       ],
     });
     component = fixture.componentInstance;
-    habitService = TestBed.inject(HabitService);
 
     await fixture.whenStable();
   });
@@ -55,21 +57,39 @@ describe('HabitForm', () => {
     expect(errors).toEqual(expectedErrors);
   });
 
-  it('should show name is required and the length of habits should stay 3 when the submission is with an empty string', async () => {
+  // 2. il nome dice cosa verifichiamo davvero ora: niente emit + errore visibile
+  it('should not emit and should show "Name is required" when submitting an empty form', async () => {
     const element: HTMLElement = fixture.nativeElement;
 
-    const saveButton = element.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-
-    saveButton.click();
-
+    element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
     await fixture.whenStable();
+
     const errors = Array.from(element.querySelectorAll('#name-errors p')).map((p) =>
       p.textContent?.trim(),
     );
 
-    expect(habitService.habits().length).toBe(3);
-    expect(errors[0]).toEqual('Name is required');
+    // 3. al posto di habits().length: il form non deve aver emesso niente
+    expect(emittedHabit).toBeUndefined();
+    expect(errors[0]).toBe('Name is required');
   });
 
-  it('should emit an habit when clicking on the submission button', async () => {});
+  it('should emit name and category when submitting a valid form', async () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    const nameInput = element.querySelector<HTMLInputElement>('#name')!;
+    const categorySelect = element.querySelector<HTMLSelectElement>('#category')!;
+
+    nameInput.value = 'Coding kata';
+    nameInput.dispatchEvent(new Event('input'));
+
+    categorySelect.value = 'study';
+    categorySelect.dispatchEvent(new Event('input'));
+
+    await fixture.whenStable();
+
+    element.querySelector<HTMLButtonElement>('button[type="submit"]')!.click();
+    await fixture.whenStable();
+
+    expect(emittedHabit).toEqual({ name: 'Coding kata', category: 'study' });
+  });
 });

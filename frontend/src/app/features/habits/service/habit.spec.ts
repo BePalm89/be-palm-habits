@@ -43,4 +43,24 @@ describe('HabitService', () => {
     expect(service.habits()[3].scheduledDays).toEqual(EVERY_DAY);
     expect(service.habits()[3].reminder).toBe(null);
   });
+
+  it('should update an existing habit when edit method is called', () => {
+    const updatedHabit: Pick<Habit, 'name' | 'category'> = {
+      name: '    Coding kata   ',
+      category: 'reading',
+    };
+
+    service.edit('id1', updatedHabit);
+
+    const habit = service.habits().find((h) => h.id === 'id1');
+
+    expect(service.habits().length).toBe(3);
+
+    expect(habit?.name).toBe('Coding kata');
+    expect(habit?.category).toBe('reading');
+
+    expect(habit?.id).toBe('id1');
+    expect(habit?.reminder).toBe('07:30');
+    expect(habit?.scheduledDays).toEqual(EVERY_DAY);
+  });
 });
