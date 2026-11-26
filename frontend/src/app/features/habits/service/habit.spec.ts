@@ -67,4 +67,52 @@ describe('HabitService', () => {
     expect(habit?.reminder).toBe('07:00');
     expect(habit?.scheduledDays).toEqual([0, 2, 4]);
   });
+
+  describe('toggleCompletedDate', () => {
+    const datesOf = (id: string) => service.habits().find((h) => h.id === id)?.completedDates;
+
+    it('adds the date when the habit was not done that day', () => {
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      expect(datesOf('id1')).toEqual(['2026-11-26']);
+    });
+
+    it('removes only that date when the habit was already done that day', () => {
+      service.toggleCompletedDate('id1', '2026-11-25');
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      expect(datesOf('id1')).toEqual(['2026-11-25']);
+    });
+
+    it('does not touch the other habits', () => {
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      expect(datesOf('id2')).toEqual([]);
+      expect(datesOf('id3')).toEqual([]);
+    });
+
+    it('creates a new array instead of changing the old one', () => {
+      const before = datesOf('id1');
+
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      expect(before).toEqual([]);
+      expect(datesOf('id1')).not.toBe(before);
+    });
+
+    it('keeps the completed dates when the habit is edited', () => {
+      service.toggleCompletedDate('id1', '2026-11-26');
+
+      service.edit('id1', {
+        name: 'Coding kata',
+        category: 'study',
+        scheduledDays: [0, 2, 4],
+        reminder: null,
+      });
+
+      expect(datesOf('id1')).toEqual(['2026-11-26']);
+    });
+  });
 });

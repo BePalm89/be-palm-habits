@@ -12,6 +12,7 @@ const mockHabits: Habit[] = [
     category: 'study',
     reminder: '07:30',
     scheduledDays: [0, 2, 4],
+    completedDates: [],
   },
   {
     id: 'id2',
@@ -19,6 +20,7 @@ const mockHabits: Habit[] = [
     category: 'reading',
     reminder: '22:30',
     scheduledDays: [5, 6],
+    completedDates: [],
   },
   {
     id: 'id3',
@@ -26,6 +28,7 @@ const mockHabits: Habit[] = [
     category: 'cats',
     reminder: '08:00',
     scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+    completedDates: ['2026-10-28'],
   },
 ];
 
@@ -40,6 +43,7 @@ describe('TodayPage', () => {
 
     mockHabitService = {
       habits: mockHabitsSignal.asReadonly(),
+      toggleCompletedDate: vi.fn(),
     };
 
     vi.useFakeTimers({ toFake: ['Date', 'setInterval', 'clearInterval'] });
@@ -97,6 +101,7 @@ describe('TodayPage', () => {
         category: 'study',
         reminder: '08:00',
         scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+        completedDates: [],
       },
     ]);
 
@@ -130,5 +135,55 @@ describe('TodayPage', () => {
     expect(el.textContent).toContain(mockHabitsSignal()[2].name);
     expect(el.textContent).not.toContain(mockHabitsSignal()[1].name);
     expect(el.textContent).toContain('Friday, October 30');
+  });
+
+  describe('done today', () => {
+    // System time: Thursday 29 October 2026, 23:59:30.
+    // "cleaning cat's stuff" (id3) is scheduled every day and was done yesterday (2026-10-28).
+    const catsButton = () =>
+      [...(fixture.nativeElement as HTMLElement).querySelectorAll('button')].find((b) =>
+        b.textContent.includes("cleaning cat's stuff"),
+      )!;
+
+    const setCatsCompletedDates = (dates: string[]) =>
+      mockHabitsSignal.update((habits) =>
+        habits.map((h) => (h.id === 'id3' ? { ...h, completedDates: dates } : h)),
+      );
+
+    it('shows a habit done yesterday as not done today', () => {
+      expect(catsButton().getAttribute('aria-pressed')).toBe('false');
+    });
+
+    it('shows a habit as done when today is in its completed dates', async () => {
+      setCatsCompletedDates(['2026-10-28', '2026-10-29']);
+
+      await fixture.whenStable();
+
+      expect(catsButton().getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('asks the service to toggle the clicked habit for today', () => {
+      catsButton().click();
+
+      expect(mockHabitService.toggleCompletedDate).toHaveBeenCalledExactlyOnceWith(
+        'id3',
+        '2026-10-29',
+      );
+    });
+
+    it('shows the habit as not done again after midnight and toggles the new day', async () => {
+      setCatsCompletedDates(['2026-10-29']);
+      await fixture.whenStable();
+      expect(catsButton().getAttribute('aria-pressed')).toBe('true');
+
+      await vi.advanceTimersByTimeAsync(60_000);
+      await fixture.whenStable();
+
+      expect(catsButton().getAttribute('aria-pressed')).toBe('false');
+
+      catsButton().click();
+
+      expect(mockHabitService.toggleCompletedDate).toHaveBeenCalledWith('id3', '2026-10-30');
+    });
   });
 });

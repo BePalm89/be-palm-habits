@@ -65,6 +65,7 @@ function makeHabit(overrides: Partial<Habit>): Habit {
     category: 'study',
     reminder: null,
     scheduledDays: [],
+    completedDates: [],
     ...overrides,
   };
 }

@@ -10,6 +10,7 @@ const habit: Habit = {
   category: 'cats',
   reminder: '07:30',
   scheduledDays: [0, 2, 4],
+  completedDates: [],
 };
 
 describe('HabitRow', () => {
