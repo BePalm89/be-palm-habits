@@ -9,6 +9,7 @@ export type Habit = {
   category: Category;
   reminder: string | null; // "HH:mm" (24h), null = no reminder
   scheduledDays: number[]; // 0 = Monday … 6 = Sunday (≠ Date.getDay(), where 0 = Sunday!)
+  completedDates: string[]; //"YYYY-MM-DD"
 };
 
 export type When = 'every-day' | 'chosen-days';

@@ -21,6 +21,14 @@ export class TodayPage implements OnInit, OnDestroy {
     todayHabits(this.habitService.habits(), this.today()),
   );
 
+  protected readonly todayKey = computed(() =>
+    new Intl.DateTimeFormat('en-CA', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(this.today()),
+  );
+
   ngOnInit(): void {
     this.interval = setInterval(() => {
       this.today.set(new Date());
@@ -29,5 +37,9 @@ export class TodayPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.interval);
+  }
+
+  protected onToggle(id: string) {
+    this.habitService.toggleCompletedDate(id, this.todayKey());
   }
 }

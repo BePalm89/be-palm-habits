@@ -1,17 +1,48 @@
 :host {
+  display: block;
+}
+
+button {
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
   min-height: 64px;
   box-sizing: border-box;
   padding: 10px 14px;
+  border: 0;
   border-radius: 18px;
   background: var(--color-surface);
+  text-align: left;
+  cursor: pointer;
 
-  p {
+  &:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .name {
     flex-grow: 1;
     min-width: 0;
     font-weight: 700;
     font-size: 16px;
+  }
+
+  .check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 2px solid var(--color-check-border);
+    border-radius: 999px;
+  }
+
+  .check.done {
+    border: 0;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
   }
 }

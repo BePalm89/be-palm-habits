@@ -25,6 +25,7 @@
   --color-category-sport-text: #9c2c5a;
   --color-category-cats-bg: #d5f0ec;
   --color-category-cats-text: #0f6b60;
+  --color-check-border: #b9c3d6;
 
   --color-input-border: #c7cfdd;
   --color-focus: #2152d6;
@@ -53,6 +54,7 @@
     --color-category-sport-text: #f5a3c3;
     --color-category-cats-bg: #133a36;
     --color-category-cats-text: #7fd9cb;
+    --color-check-border: #4a5878;
 
     --color-input-border: #34405c;
     --color-focus: #6e95ff;

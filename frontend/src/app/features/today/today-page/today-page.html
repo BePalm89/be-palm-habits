@@ -3,7 +3,11 @@
   <ul>
     @for (habit of habitsForToday(); track habit.id) {
       <li>
-        <app-today-habit-row [habit]="habit"></app-today-habit-row>
+        <app-today-habit-row
+          [habit]="habit"
+          (toggle)="onToggle($event)"
+          [isDone]="habit.completedDates.includes(todayKey())"
+        ></app-today-habit-row>
       </li>
     }
   </ul>

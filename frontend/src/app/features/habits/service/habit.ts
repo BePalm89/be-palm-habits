@@ -9,7 +9,8 @@ export class HabitService {
       name: 'coding training',
       category: 'study',
       reminder: '07:30',
-      scheduledDays: [0, 2, 4],
+      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      completedDates: [],
     },
     {
       id: 'id2',
@@ -17,13 +18,15 @@ export class HabitService {
       category: 'reading',
       reminder: '22:30',
       scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      completedDates: [],
     },
     {
       id: 'id3',
       name: "cleaning cat's stuff",
       category: 'cats',
       reminder: null,
-      scheduledDays: [6],
+      scheduledDays: [0, 1, 2, 3, 4, 5, 6],
+      completedDates: [],
     },
   ]);
 
@@ -40,6 +43,7 @@ export class HabitService {
       id: crypto.randomUUID(),
       reminder: habit.reminder,
       scheduledDays: habit.scheduledDays,
+      completedDates: [],
     };
 
     this._habits.update((habits) => [...habits, newHabit]);
@@ -48,6 +52,21 @@ export class HabitService {
   edit(id: string, habit: HabitDraft) {
     this._habits.update((habits) =>
       habits.map((h) => (h.id === id ? { ...h, ...habit, name: habit.name.trim() } : h)),
+    );
+  }
+
+  toggleCompletedDate(id: string, date: string) {
+    this._habits.update((habits) =>
+      habits.map((habit) =>
+        habit.id === id
+          ? {
+              ...habit,
+              completedDates: habit.completedDates.includes(date)
+                ? habit.completedDates.filter((d) => d !== date)
+                : [...habit.completedDates, date],
+            }
+          : habit,
+      ),
     );
   }
 }

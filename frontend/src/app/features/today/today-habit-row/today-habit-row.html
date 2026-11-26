@@ -1,2 +1,11 @@
-<app-avatar-category [category]="habit().category"></app-avatar-category>
-<p>{{ habit().name }}</p>
+<button type="button" [aria-pressed]="isDone()" (click)="toggle.emit(habit().id)">
+  <app-avatar-category [category]="habit().category" aria-hidden="true" />
+  <span class="name">{{ habit().name }}</span>
+  @if (isDone()) {
+    <span class="check done">
+      <svg lucideCheck [size]="16" [strokeWidth]="3"></svg>
+    </span>
+  } @else {
+    <span class="check"></span>
+  }
+</button>
