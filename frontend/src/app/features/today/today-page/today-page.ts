@@ -5,9 +5,10 @@ import { TodayHabitRow } from '../today-habit-row/today-habit-row';
 import { TodayHeader } from '../today-header/today-header';
 import { toDateKey } from '../../shared/utils/date-key';
 import { remainingHabitNames } from '../utils/remaining-habit-names';
+import { TodaySummary } from '../today-summary/today-summary';
 
 @Component({
-  imports: [TodayHabitRow, TodayHeader],
+  imports: [TodayHabitRow, TodayHeader, TodaySummary],
   selector: 'app-today-page',
   styleUrl: './today-page.css',
   templateUrl: './today-page.html',

@@ -1,0 +1,9 @@
+<div class="ring">svg</div>
+<div class="text">
+  <p class="title">{{ done() }} of {{ total() }} done</p>
+  @if (remaining().length === 0) {
+    <p class="remaining">All done for today!</p>
+  } @else {
+    <p class="remaining">Left: {{ remaining().join(', ') }}</p>
+  }
+</div>

@@ -1,6 +1,11 @@
 <app-today-header [today]="today()"></app-today-header>
 
 @if (habitsForToday().length) {
+  <app-today-summary
+    [done]="done()"
+    [total]="total()"
+    [remaining]="remaining()"
+  ></app-today-summary>
   <ul>
     @for (habit of habitsForToday(); track habit.id) {
       <li>
