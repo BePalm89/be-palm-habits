@@ -1,4 +1,5 @@
 <app-today-header [today]="today()"></app-today-header>
+
 @if (habitsForToday().length) {
   <ul>
     @for (habit of habitsForToday(); track habit.id) {
