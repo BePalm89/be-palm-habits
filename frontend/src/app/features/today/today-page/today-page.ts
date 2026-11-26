@@ -3,6 +3,7 @@ import { HabitService } from '../../habits/service/habit';
 import { todayHabits } from '../utils/today-habits';
 import { TodayHabitRow } from '../today-habit-row/today-habit-row';
 import { TodayHeader } from '../today-header/today-header';
+import { toDateKey } from '../../shared/utils/date-key';
 
 @Component({
   imports: [TodayHabitRow, TodayHeader],
@@ -21,13 +22,7 @@ export class TodayPage implements OnInit, OnDestroy {
     todayHabits(this.habitService.habits(), this.today()),
   );
 
-  protected readonly todayKey = computed(() =>
-    new Intl.DateTimeFormat('en-CA', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    }).format(this.today()),
-  );
+  protected readonly todayKey = computed(() => toDateKey(this.today()));
 
   ngOnInit(): void {
     this.interval = setInterval(() => {
