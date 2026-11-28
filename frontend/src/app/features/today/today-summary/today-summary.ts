@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -11,4 +11,9 @@ export class TodaySummary {
   readonly total = input.required<number>();
   readonly remaining = input.required<string[]>();
   readonly percentage = input.required<number>();
+  protected readonly circumference = 34 * 2 * Math.PI;
+
+  protected readonly percentageRing = computed(() => {
+    return this.circumference * (1 - this.percentage() / 100);
+  });
 }
