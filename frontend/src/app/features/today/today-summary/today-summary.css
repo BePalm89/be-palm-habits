@@ -7,10 +7,6 @@
   background: var(--color-surface);
 }
 
-.ring {
-  flex-shrink: 0;
-}
-
 .text {
   display: flex;
   flex-direction: column;

@@ -70,7 +70,7 @@ describe('TodaySummary', () => {
   ];
 
   it.each(cases)(
-    'returns $name when done is $done, total is $total and remaining is $remaining',
+    'returns $name when done is $doneTest, total is $totalTest and remaining is $remainingTest',
     async ({ doneTest, totalTest, remainingTest, expected }) => {
       done.set(doneTest);
       total.set(totalTest);
