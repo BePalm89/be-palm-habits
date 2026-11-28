@@ -10,4 +10,5 @@ export class TodaySummary {
   readonly done = input.required<number>();
   readonly total = input.required<number>();
   readonly remaining = input.required<string[]>();
+  readonly percentage = input.required<number>();
 }

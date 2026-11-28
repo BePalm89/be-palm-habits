@@ -6,6 +6,7 @@ import { TodayHeader } from '../today-header/today-header';
 import { toDateKey } from '../../shared/utils/date-key';
 import { remainingHabitNames } from '../utils/remaining-habit-names';
 import { TodaySummary } from '../today-summary/today-summary';
+import { toPercent } from '../../shared/utils/percentage';
 
 @Component({
   imports: [TodayHabitRow, TodayHeader, TodaySummary],
@@ -33,6 +34,8 @@ export class TodayPage implements OnInit, OnDestroy {
   protected readonly total = computed(() => this.habitsForToday().length);
 
   protected readonly done = computed(() => this.total() - this.remaining().length);
+
+  protected readonly percentage = computed(() => toPercent(this.done(), this.total()));
 
   ngOnInit(): void {
     this.interval = setInterval(() => {

@@ -5,6 +5,7 @@
     [done]="done()"
     [total]="total()"
     [remaining]="remaining()"
+    [percentage]="percentage()"
   ></app-today-summary>
   <ul>
     @for (habit of habitsForToday(); track habit.id) {
